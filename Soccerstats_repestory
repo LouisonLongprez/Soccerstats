@@ -1,1 +1,20 @@
+import pandas as pd
+
+# Charger le fichier CSV
+df = pd.read_csv('dataset.csv')
+
+# Supprimer certaines colonnes
+colonnes_a_supprimer = ['Yellow_card', 'age']
+df = df.drop(columns=colonnes_a_supprimer)
+
+# Remplir certaines lignes (par exemple, remplir les valeurs manquantes avec la moyenne de la colonne)
+colonnes_a_remplir = ['nombre de match joué par joueur', 'nombre de minute joué par joueur', 'nombre de but', 'nombre d\'assist', 'nombre de carton rouge']
+for colonne in colonnes_a_remplir:
+    df[colonne].fillna(df[colonne].mean(), inplace=True)
+
+# Enregistrer le DataFrame modifié dans un fichier CSV
+df.to_csv('dataset_corrige.csv', index=False)
+
+# Afficher les premières lignes du DataFrame modifié
+print(df.head())
 
